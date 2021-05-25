@@ -1,0 +1,36 @@
+<div class="store-photo-section">
+  <div class="store-photo-wrapper">
+    {% if section.blocks.size > 0 %}
+      {% for block in section.blocks %}
+        <div class="store-photo">
+          <img src="{{ block.settings.image | img_url: 'master' }}" >
+        </div>
+      {% endfor %}
+    {% endif %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Store Photos",
+  "blocks": [
+    {
+      "type": "photo",
+      "name": "Photo",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Store Photos",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}

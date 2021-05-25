@@ -1,0 +1,117 @@
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Condensed:700,400&display=swap"><link rel="stylesheet" href="https://cdn.pagefly.io/pagefly/2.10.2/css/main-style.css?t=20200511160552"><link rel="stylesheet" href="{{ 'pagefly.07ae41e0.scss.css' | asset_url }}">
+		  {% if product_4737709342764 == null %}{%- assign product_4737709342764 = all_products['bai-tỉ-phu-sai-gon'] -%}{% endif %}<script>
+	window.__pageflyProducts = window.__pageflyProducts || {};
+	window.__pageflyProducts["4737709342764"] = {
+					id: {{product_4737709342764.id | json }},
+					handle: {{product_4737709342764.handle | json }},
+					title: {{product_4737709342764.title | json }},
+					type: {{product_4737709342764.type | json }},
+					url: {{product_4737709342764.url | json }},
+					vendor: {{product_4737709342764.vendor | json }},
+					variants: {{product_4737709342764.variants | json }},
+					options: {{product_4737709342764.options | json }},
+					media: {{product_4737709342764.media | json }},
+					first_available_variant: {{product_4737709342764.first_available_variant | json }},
+					has_only_default_variant: {{product_4737709342764.has_only_default_variant | json }},
+					options_with_values: {{product_4737709342764.options_with_values | json }},
+					selected_variant: {{product_4737709342764.selected_variant | json }},
+					selected_or_first_available_variant: {{product_4737709342764.selected_or_first_available_variant | json }},
+					tags: {{product_4737709342764.tags | json }},
+					template_suffix: {{product_4737709342764.template_suffix | json }},
+					featured_image: {{product_4737709342764.featured_image | json }},
+					featured_media: {{product_4737709342764.featured_media | json }},
+					images: {{product_4737709342764.images | json }}
+				};window.__pageflyProducts["{{product.id}}"] = {
+					id: {{product.id | json }},
+					handle: {{product.handle | json }},
+					title: {{product.title | json }},
+					type: {{product.type | json }},
+					url: {{product.url | json }},
+					vendor: {{product.vendor | json }},
+					variants: {{product.variants | json }},
+					options: {{product.options | json }},
+					media: {{product.media | json }},
+					first_available_variant: {{product.first_available_variant | json }},
+					has_only_default_variant: {{product.has_only_default_variant | json }},
+					options_with_values: {{product.options_with_values | json }},
+					selected_variant: {{product.selected_variant | json }},
+					selected_or_first_available_variant: {{product.selected_or_first_available_variant | json }},
+					tags: {{product.tags | json }},
+					template_suffix: {{product.template_suffix | json }},
+					featured_image: {{product.featured_image | json }},
+					featured_media: {{product.featured_media | json }},
+					images: {{product.images | json }}
+				};
+	</script>{% if collection_188163620908 == null %}{%- assign collection_188163620908 = collections['boardgame'] -%}{% endif %}<script>
+	window.__pageflyCollections = window.__pageflyCollections || {};
+	window.__pageflyCollections["188163620908"] = {{collection_188163620908 | json }};
+	</script><div class="__pf" id="__pf"><div data-pf-type="Body" class="sc-pRgDJ fzXWJx pf-66869525"><div data-pf-type="Layout" class="pf-39316686"><div data-pf-type="ProductPreview" class="sc-pBAKv bbJvDc pf-39405247">{% comment %}
+  The contents of the product.liquid template can be found in /sections/product-template.liquid
+{% endcomment %}
+
+{% section 'product-template' %}
+{% section 'product-recommendations' %}
+
+{% if collection %}
+  <div class="text-center return-link-wrapper page-width">
+    <a href="{{ collection.url }}" class="btn btn--secondary btn--has-icon-before return-link">
+      {% include 'icon-arrow-left' %}
+      {{ 'products.product.back_to_collection' | t: title: collection.title }}
+    </a>
+  </div>
+{% endif %}
+
+<script>
+  // Override default values of shop.strings for each template.
+  // Alternate product templates can change values of
+  // add to cart button, sold out, and unavailable states here.
+  theme.productStrings = {
+    addToCart: {{ 'products.product.add_to_cart' | t | json }},
+    soldOut: {{ 'products.product.sold_out' | t | json }},
+    unavailable: {{ 'products.product.unavailable' | t | json }}
+  }
+</script>
+
+{% assign current_variant = product.selected_or_first_available_variant %}
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org/",
+  "@type": "Product",
+  "@id": {{ canonical_url | append: '#product' | json }},
+  "name": {{ product.title | json }},
+  "url": {{ shop.url | append: product.url | json }},
+  {%- if product.featured_media -%}
+    {%- assign media_size = product.featured_media.preview_image.width | append: 'x' -%}
+    "image": [
+      {{ product.featured_media | img_url: media_size | prepend: "https:" | json }}
+    ],
+  {%- endif -%}
+  "description": {{ product.description | strip_html | json }},
+  {%- if current_variant.sku != blank -%}
+    "sku": {{ current_variant.sku | json }},
+  {%- endif -%}
+  "brand": {
+    "@type": "Thing",
+    "name": {{ product.vendor | json }}
+  },
+  "offers": [
+    {%- for variant in product.variants -%}
+      {
+        "@type" : "Offer",
+        {%- if variant.sku != blank -%}
+          "sku": {{ variant.sku | json }},
+        {%- endif -%}
+        "availability" : "http://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}",
+        "price" : {{ variant.price | divided_by: 100.00 | json }},
+        "priceCurrency" : {{ cart.currency.iso_code | json }},
+        "url" : {{ shop.url | append: variant.url | json }}
+      }{% unless forloop.last %},{% endunless %}
+    {%- endfor -%}
+  ]
+}
+</script>
+</div><div data-container="true" class="sc-pZopv bjKdkd pf-ee477b90" data-pf-type="Section"><div class="sc-pQQXS iWCqut" style="max-width: 1170px;"><div class="sc-qPjXN eYzxUD pf-fba3ee47 pf-r pf-r-eh" data-pf-type="Row" style="--pf-s-lg:50px; --pf-s-md:50px; --pf-s-sm:15px; --pf-s-xs:15px;"><div class="sc-pbYdQ jklmHY pf-c pf-c-xs--12 pf-c-sm--6 pf-c-md--6 pf-c-lg--6"><div class="sc-pkUyL fTyjzF pf-380c178d" data-pf-type="Column"><div class="sc-pdkfH jjYIOP pf-2872380c pagefly__table--default" data-pf-type="Table"><table><tbody><tr><th data-cell-id="A1" class="A1"><span>MODEL</span></th><th data-cell-id="B1" class="B1"><span>Bộ bài tỉ phú Sài Gòn</span></th></tr><tr><td data-cell-id="A2" class="A2"><span>Chất liệu</span></td><td data-cell-id="B2" class="B2"><span>Giấy</span></td></tr><tr><td data-cell-id="A3" class="A3"><span>Kích thước<br></span></td><td data-cell-id="B3" class="B3"><span>115 x 20 x 90</span></td></tr><tr><td data-cell-id="A4" class="A4"><span>SL lá bài</span></td><td data-cell-id="B4" class="B4"><span>110 lá</span></td></tr></tbody></table></div></div></div><div class="sc-pbYdQ jklmHY pf-c pf-c-xs--12 pf-c-sm--6 pf-c-md--6 pf-c-lg--6"><div class="sc-pkUyL fTyjzF pf-bfc9fba3" data-pf-type="Column"><a data-action="modal" data-popup-content="youtube" data-src="https://www.youtube.com/embed/UhP76B2SMiE?autoplay=0&loop=0&mute=0&controls=0&enablejsapi=1" href="#" data-width="854px" data-height="480px" data-pf-type="Image" class="sc-qQWDO dxrmGe pf-178dbfc9"><picture class="sc-psedN fLDHlO"><source media="(min-width: 1200px)" srcset="https://cdn.shopify.com/s/files/1/0353/9471/5692/t/4/assets/pf-2db96b3e--200316MonoDeal8_800x3000.jpg?v=1589183476"><source media="(min-width: 992px) and (max-width: 1199px)" srcset="https://cdn.shopify.com/s/files/1/0353/9471/5692/t/4/assets/pf-2db96b3e--200316MonoDeal8.jpg?v=1589183476"><source media="(min-width: 768px) and (max-width: 991px)" srcset="https://cdn.shopify.com/s/files/1/0353/9471/5692/t/4/assets/pf-2db96b3e--200316MonoDeal8_800x534.jpg?v=1589183476&resized"><source media="(max-width: 767px) and (orientation: portrait)" srcset="https://cdn.shopify.com/s/files/1/0353/9471/5692/t/4/assets/pf-2db96b3e--200316MonoDeal8_400x267.jpg?v=1589183476&resized 1x, https://cdn.shopify.com/s/files/1/0353/9471/5692/t/4/assets/pf-2db96b3e--200316MonoDeal8_850x850.jpg?v=1589183476&resized 2x"><source media="(max-width: 767px) and (orientation: landscape)" srcset="https://cdn.shopify.com/s/files/1/0353/9471/5692/t/4/assets/pf-2db96b3e--200316MonoDeal8_400x267.jpg?v=1589183476&resized 1x, https://cdn.shopify.com/s/files/1/0353/9471/5692/t/4/assets/pf-2db96b3e--200316MonoDeal8.jpg?v=1589183476 2x"><img src="https://cdn.shopify.com/s/files/1/0353/9471/5692/t/4/assets/pf-2db96b3e--200316MonoDeal8.jpg?v=1589183476" alt="Video"></picture></a></div></div></div></div></div><div data-container="true" class="sc-pZopv bjKdkd pf-97c3ccf8" data-pf-type="Section"><div class="sc-pQQXS iWCqut" style="max-width: 1170px;"><div class="sc-qPjXN eYzxUD pf-5e82b8c6 pf-r pf-r-eh" data-pf-type="Row" style="--pf-s-lg:15px; --pf-s-md:15px; --pf-s-sm:15px; --pf-s-xs:15px;"><div class="sc-pbYdQ jklmHY pf-c pf-c-xs--12 pf-c-sm--12 pf-c-md--12 pf-c-lg--12"><div class="sc-pkUyL fTyjzF pf-77ed5e82" data-pf-type="Column"><h3 data-pf-type="Heading" class="sc-oTLFK lcHmGL pf-9fd877ed"><span data-pf-type="Text" class="sc-ptSuy fnmilh pf-8d489fd8">Tính năng sản phẩm</span></h3></div></div></div><div class="sc-qPjXN eYzxUD pf-57a897c3 pf-r pf-r-eh" data-pf-type="Row" style="--pf-s-lg:15px; --pf-s-md:15px; --pf-s-sm:15px; --pf-s-xs:15px;"><div class="sc-pbYdQ jklmHY pf-c pf-c-xs--12 pf-c-sm--6 pf-c-md--3 pf-c-lg--3"><div class="sc-pkUyL fTyjzF pf-c77e301a" data-pf-type="Column"><h4 data-pf-type="Heading" class="sc-oTLFK cqabWo pf-baf717c5"><i class="sc-pjGMk jrwOpx pf-b8c66981 fa fa-codepen" data-pf-type="Icon"></i><span data-pf-type="Text" class="sc-ptSuy fnmilh pf-6981baf7">Tiện lợi</span></h4><p data-pf-type="Paragraph2" class="sc-pkvvt cbrLgP pf-bf46c77e"><span data-pf-type="Text" class="sc-ptSuy fnmilh pf-7774bf46">Với kích thước nhỏ gọn, sản phẩm có thể mang theo dễ dàng, chơi được ở nhiều nói.</span></p></div></div><div class="sc-pbYdQ jklmHY pf-c pf-c-xs--12 pf-c-sm--6 pf-c-md--3 pf-c-lg--3"><div class="sc-pkUyL fTyjzF pf-57b8fd3f" data-pf-type="Column"><h4 data-pf-type="Heading" class="sc-oTLFK cqabWo pf-2bb5db01"><i class="sc-pjGMk jrwOpx pf-301a14a9 fa fa-link" data-pf-type="Icon"></i><span data-pf-type="Text" class="sc-ptSuy fnmilh pf-14a92bb5">Luyện tập kĩ năng</span></h4><p data-pf-type="Paragraph2" class="sc-pkvvt cbrLgP pf-b83d57b8"><span data-pf-type="Text" class="sc-ptSuy fnmilh pf-e161b83d">Ngoài những phút giây thư giãn, bạn có thể rèn luyện kĩ năng thương lượng, bán hàng của mình thông qua trò chơi.</span></p></div></div><div class="sc-pbYdQ jklmHY pf-c pf-c-xs--12 pf-c-sm--6 pf-c-md--3 pf-c-lg--3"><div class="sc-pkUyL fTyjzF pf-7c2cbe42" data-pf-type="Column"><h4 data-pf-type="Heading" class="sc-oTLFK cqabWo pf-d06a0d78"><i class="sc-pjGMk jrwOpx pf-fd3f4833 fa fa-american-sign-language-interpreting" data-pf-type="Icon"></i><span data-pf-type="Text" class="sc-ptSuy fnmilh pf-4833d06a">Đa dạng số người chơi</span></h4><p data-pf-type="Paragraph2" class="sc-pkvvt cbrLgP pf-d7ec7c2c"><span data-pf-type="Text" class="sc-ptSuy fnmilh pf-4d4fd7ec">Trò chơi được thiết kế chơi từ 2 - 5 người, bạn có thể linh hoạt mời các bạn khác tham dự.</span></p></div></div><div class="sc-pbYdQ jklmHY pf-c pf-c-xs--12 pf-c-sm--6 pf-c-md--3 pf-c-lg--3"><div class="sc-pkUyL fTyjzF pf-a28c57a8" data-pf-type="Column"><h4 data-pf-type="Heading" class="sc-oTLFK cqabWo pf-0aca7112"><i class="sc-pjGMk jrwOpx pf-be426211 fa fa-arrows-alt" data-pf-type="Icon"></i><span data-pf-type="Text" class="sc-ptSuy fnmilh pf-62110aca">Thiết kế gần gũi</span></h4><p data-pf-type="Paragraph2" class="sc-pkvvt cbrLgP pf-0043a28c"><span data-pf-type="Text" class="sc-ptSuy fnmilh pf-5c320043">Cùng với ngôn ngữ "Sài gòn hóa" sẽ tạo cho bạn cảm giác như đang kinh doanh thực thụ</span></p></div></div></div></div></div></div></div></div><script>
+					window.__pagefly_setting__={"baseURL":"https://apps.pagefly.io","analyticsURL":"https://analytics.pagefly.io","isBackend":false,"cdnURL":"https://cdn.pagefly.io","pageflyVersion":"2.10.2","shopDomain":"maztermind.myshopify.com","elementData":{},"pageTitle":"Bộ bài tỉ phú Sài Gòn","pageType":"product","pageId":"07ae41e0-9c2e-4f33-8e90-3e6caaa61ab8","lazyLoad":false,"imageLazyLoad":false,"nativeImageLazyLoad":true,"trackingIDs":[]};
+					window.__pagefly_setting__.moneyFormat = {{shop.money_format | json}}
+				</script><script src="https://cdn.pagefly.io/pagefly/2.10.2/core/helper.js?t=20200511160552" defer></script>

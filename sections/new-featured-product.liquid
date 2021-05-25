@@ -1,0 +1,51 @@
+<div class="page-width">
+  <div class="grid">
+    <div class="grid__item medium-down--one-whole large-up--one-third">
+      <div class="section-header text-center">
+        <h2>Leather & Wood Backgammon</h2>
+        <h4>A new look for one of the oldest and most popular board games.</h4>
+      </div>
+    </div>
+    <div class="grid__item medium-down--one-whole large-up--one-third">
+      <div class="new-featured-product__images">
+        {% for block in section.blocks %}
+          <div>
+            <img src="{{ block.settings.image | img_url: 'master' }}" alt="">
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+    <div class="grid__item medium-down--one-whole large-up--one-third">
+      <div class="new-featured-product__info">
+        <p>Made by quality materials and generations-old handcrafted technique, Leather & Wood Backgammon features an incredible sense of touch and durability. </p>
+        <a target="_blank" href="https://maztermind.com/collections/boardgames/products/leather-wood-backgammon">Read more</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "About us 3 columns",
+  "class": "index-section new-featured-product-section",
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Image",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "About us 3 columns",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}

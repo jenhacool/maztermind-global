@@ -1,0 +1,76 @@
+<div class="press-list-section">
+  <div class="grid">
+  {% if section.blocks.size > 0 %}
+    {% for block in section.blocks %}
+      {% if forloop.first %}
+        {% assign item_style = 'style-1 one-whole' %}
+      {% else %}
+        {% assign item_style = 'style-2 one-whole' %}
+      {% endif %}
+      <div class="press-item__wrapper grid__item {{ item_style }}">
+        <div class="press-item__image">
+          <a target="_blank" href="{{ block.settings.link }}">
+            <img src="{{ block.settings.image | img_url: 'master' }}" alt="{{ block.settings.title }}">
+          </a>
+        </div>
+        <div class="press-item__info">
+          <div class="press-subtitle">
+            {{ block.settings.sub_title }}
+          </div>
+          <h4 class="press-title">
+            <a target="_blank" href="{{ block.settings.link }}">{{ block.settings.title }}</a>
+          </h4>
+          <div class="press-desc">
+            <p>{{- block.settings.desc -}}</p>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  {% endif %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Press List",
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "label": "Title",
+          "id": "title"
+        },
+        {
+          "type": "text",
+          "label": "Sub Title",
+          "id": "sub_title"
+        },
+        {
+          "type": "textarea",
+          "label": "Description",
+          "id": "desc"
+        },
+        {
+          "type": "url",
+          "label": "Link",
+          "id": "link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Press List",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}

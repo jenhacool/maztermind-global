@@ -1,0 +1,127 @@
+{% comment %}
+  The contents of the product.liquid template can be found in /sections/product-template.liquid
+{% endcomment %}
+
+<div id="product-info">
+  {% section 'product-not-for-sale-template' %}
+</div>
+
+<div id="product-description" class="template-product-section">
+  <div class="page-width">
+    <div class="section-header text-center">
+      <h4>Description</h4>
+    </div>
+    <div class="rte">
+      {{ product.description }}
+    </div>
+  </div>
+</div>
+
+{% if product.metafields.product_info.video %}
+<div id="product-video" class="template-product-section ">
+  <div class="page-width">
+    <video controls="controls" style="width: 100%; height: auto;" loop="loop" muted="" preload="" id="vid" {% if product.metafields.product_info.video_poster %}poster="{{ product.metafields.product_info.video_poster | file_img_url: '1400x' }}"{% endif %}>
+      <source src="{{ product.metafields.product_info.video }}" type="video/mp4">
+    Your browser does not support our video.
+    </video>
+  </div>
+</div>
+{% endif %}
+{% if product.metafields.product_info.gallery.size > 0 %}
+<div id="product-gallery" class="template-product-section">
+  <div class="page-width">
+    <div class="section-header text-center">
+      <h4>Gallery</h4>
+    </div>
+
+    <div class="product-gallery-wrapper">
+      <div class="product-gallery-slider">
+        {% for image in product.metafields.product_info.gallery.images %}
+          <!-- <div class="slider-item"> -->
+            <img data-mfp-src="{{ image | file_img_url: 'master' }}" src="{{ image | file_img_url: 'x400' }}" />
+          <!-- </div> -->
+        {% endfor %}
+      </div>
+      <!-- <div class="product-gallery-slider-button">
+        <div class="product-gallery-slider-prev">{% include 'icon-chevron-left' %}</div>
+        <div class="product-gallery-slider-next">{% include 'icon-chevron-right' %}</div>
+      </div> -->
+    </div>
+  </div>
+</div>
+{% endif %}
+
+{% comment %}{% section 'page-faq-template' %}{% endcomment %}
+
+{% section 'product-recommendations' %}
+
+<div class="page-width">
+
+{% include 'product-reviews' %}
+</div>
+{% if collection %}
+  <div class="text-center return-link-wrapper page-width">
+    <a href="{{ collection.url }}" class="btn btn--secondary btn--has-icon-before return-link">
+      {% include 'icon-arrow-left' %}
+      {{ 'products.product.back_to_collection' | t: title: collection.title }}
+    </a>
+<!--     <div class="hulkapps-reviews"><div class="item-reviews" data-product-id="{{product.id}}"></div></div> -->
+    <div data-hulkapps-reviews data-hulkapps-reviews-list></div>
+    <style>
+    	.product-review__wrapper .review-time {
+          display: none;
+        }
+    </style>
+
+  </div>
+{% endif %}
+
+<script>
+  // Override default values of shop.strings for each template.
+  // Alternate product templates can change values of
+  // add to cart button, sold out, and unavailable states here.
+  theme.productStrings = {
+    addToCart: {{ 'products.product.add_to_cart' | t | json }},
+    soldOut: {{ 'products.product.sold_out' | t | json }},
+    unavailable: {{ 'products.product.unavailable' | t | json }}
+  }
+</script>
+
+{% assign current_variant = product.selected_or_first_available_variant %}
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org/",
+  "@type": "Product",
+  "name": {{ product.title | json }},
+  "url": {{ shop.url | append: product.url | json }},
+  {%- if product.featured_media -%}
+    {%- assign media_size = product.featured_media.preview_image.width | append: 'x' -%}
+    "image": [
+      {{ product.featured_media | img_url: media_size | prepend: "https:" | json }}
+    ],
+  {%- endif -%}
+  "description": {{ product.description | strip_html | json }},
+  {%- if current_variant.sku != blank -%}
+    "sku": {{ current_variant.sku | json }},
+  {%- endif -%}
+  "brand": {
+    "@type": "Thing",
+    "name": {{ product.vendor | json }}
+  },
+  "offers": [
+    {%- for variant in product.variants -%}
+      {
+        "@type" : "Offer",
+        {%- if variant.sku != blank -%}
+          "sku": {{ variant.sku | json }},
+        {%- endif -%}
+        "availability" : "http://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}",
+        "price" : {{ variant.price | divided_by: 100.00 | json }},
+        "priceCurrency" : {{ cart.currency.iso_code | json }},
+        "url" : {{ shop.url | append: variant.url | json }}
+      }{% unless forloop.last %},{% endunless %}
+    {%- endfor -%}
+  ]
+}
+</script>

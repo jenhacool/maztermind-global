@@ -1,0 +1,64 @@
+<div class="page-width">
+    <div class="section-header text-center">
+      <h2>Commitment</h2>
+    </div>
+
+  <div class="grid icon-list">
+    {% for block in section.blocks %}
+      <div class="icon-item" {{ block.shopify_attributes }}>
+        <a target="_blank" href="{{ block.settings.link }}">
+        {% liquid
+          echo block.settings.icon_svg
+        %}
+        </a>
+        <p>{{ block.settings.icon_text }}</p>
+      </div>
+    {% endfor %}
+  </div>
+
+  <div class="text-center">
+  <a href="https://maztermind.com/pages/guarantee" target="_blank">Read more</a>
+  </div>
+
+  {% if section.blocks.size == 0 %}
+    {% include 'no-blocks' %}
+  {% endif %}
+</div>
+
+
+
+{% schema %}
+{
+  "name": "Icon list",
+  "class": "index-section icon-list-section",
+  "blocks": [
+    {
+      "type": "icon",
+      "name": "Icon",
+      "settings": [
+        {
+          "type": "html",
+          "label": "Icon",
+          "id": "icon_svg"
+        },
+        {
+          "type": "text",
+          "label": "Link",
+          "id": "link"
+        },
+        {
+          "type": "textarea",
+          "label": "Text",
+          "id": "icon_text"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Icon list",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}
